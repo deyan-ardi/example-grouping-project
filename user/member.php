@@ -2,6 +2,7 @@
 require_once '../app/Config/config.php';
 require_once '../app/Services/generateDateFormatService.php';
 require_once '../app/Controller/registerMemberController.php';
+session_start();
 ?>
 
 <?php
@@ -11,6 +12,10 @@ use services\generateDateFormatService;
 
 $date = new generateDateFormatService;
 $memberController = new registerMemberController;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $store_data = $memberController->storeMember();
+    die;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,19 +30,31 @@ $memberController = new registerMemberController;
     <div class="container m-custom-1">
         <div class="row">
             <div class="col-12 col-md-5">
+                <?php
+                if (isset($_SESSION['notification']) && $_SESSION['notification'] !== "") {
+                    $element = '';
+                    $element .= '<div class="alert alert-danger" role="alert">';
+                    $element .= $_SESSION['notification'];
+                    $element .= "</div>";
+                    echo $element;
+                    unset($_SESSION['notification']);
+                }
+                ?>
+
+
                 <div class="card">
                     <div class="card-header">
                         Form Add Data
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST">
+                        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                             <div class="mb-3">
                                 <label for="first_name" class="form-label">First Name</label>
-                                <input type="text" name="first_name" class="form-control" id="first_name">
+                                <input type="text" name="first_name" class="form-control transform-custom-1" id="first_name">
                             </div>
                             <div class="mb-3">
                                 <label for="last_name" class="form-label">Last Name</label>
-                                <input type="text" name="last_name" class="form-control" id="last_name">
+                                <input type="text" name="last_name" class="form-control transform-custom-1" id="last_name">
                             </div>
                             <div class="mb-3">
                                 <label for="student_id" class="form-label">Student Id</label>
@@ -70,8 +87,8 @@ $memberController = new registerMemberController;
                             </div>
                             <div class="mb-3">
                                 <label for="platform" class="form-label">You Preffered Platform</label>
-                                <select class="form-select" id="platform" aria-label="Default select example">
-                                    <option value=""> -- Select Friend --</option>
+                                <select class="form-select" name="platform" id="platform" aria-label="Default select example">
+                                    <option value=""> -- Select Platform --</option>
                                     <option value="1">Website</option>
                                     <option value="2">Desktop</option>
                                     <option value="3">Mobile</option>
