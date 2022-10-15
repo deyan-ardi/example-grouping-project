@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $element .= '<th scope="col" class="size-custom-1">Last Name</th>';
                                     $element .= '<th scope="col" class="size-custom-1">Class Name</th>';
                                     $element .= '<th scope="col" class="size-custom-1">Group</th>';
-                                    $element .= '<th scope="col" class="size-custom-1">Preffere Platform</th>';
+                                    $element .= '<th scope="col" class="size-custom-1">Preffered Platform</th>';
                                     $element .= '<th scope="col" class="size-custom-1">Created At</th>';
                                     $element .= '</tr>';
                                     $element .= '</thead>';
@@ -140,9 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 $element .= '<tr>';
                                                 for ($j = 0; $j < count($member); $j++) {
                                                     if ($j == 7) {
-                                                        $element .= '<td>' . $date->format($member[$j]) . '</td>';
+                                                        $element .= '<td class="size-custom-1">' . $date->format($member[$j]) . '</td>';
                                                     } else {
-                                                        $element .= '<td>' . $member[$j] . '</td>';
+                                                        $element .= '<td class="size-custom-1">' . $member[$j] . '</td>';
                                                     }
                                                 }
                                                 $element .= '</tr>';
