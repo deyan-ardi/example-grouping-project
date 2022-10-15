@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php require_once 'components/_navbar.php' ?>
     <div class="container">
         <div class="row it">
-            <div class="col-sm-4" id="one">
+            <div class="col-sm-4 mx-2" id="one">
                 <br>
                 <div class="row">
                     <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" name="save"
@@ -66,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
                     <div class="text-center">
-                        <button type="submit" name="save" class="btn btn-primary m-2">Submit</button>
+                        <button type="submit" name="save" class="btn btn-primary m-2 ">Submit</button>
                     </div>
             </div>
         </form>
 
-        <div class="col-12 col-sm-7" id="two">
+        <div class="col-12 col-sm-7 mx-4" id="two">
         <br>
             <div class="row">
                 <div class="col-sm-offset-12 form-group">
