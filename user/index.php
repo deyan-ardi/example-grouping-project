@@ -32,15 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <br>
                 <div class="row">
                     <div class="card">
-                        <div class="card-head">
-
-                        </div>
                         <div class="card-body">
 
                             <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" name="save"
                                 novalidate="" autocomplete="off" enctype="multipart/form-data">
                             <div class="col-sm-12 form-group">
-                                <h3 class="text-start">Set your class file</h3>
+                                <h3 class="text-center">Set your class file</h3>
                             </div>
                         </div>
                             <div id="uploader">
@@ -79,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             </div>
                             <div class="text-center pe-3">
-                                <button type="submit" name="save" class="btn btn-primary m-2 col-12">Submit</button>
+                                <button type="submit" name="save" class="btn bg-custom-1 text-custom-1 m-2 col-12">Submit</button>
                             </div>
                     </div>
                 </form>
@@ -109,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $element .= '</thead>';
                     $element .= '<tbody>';
                     $filename = "../database/General/all_class.csv";
-                    if (!file_exists($filename)) {
+                    if (filesize($filename) == 0) {
                         $element .= '<tr>';
                         $element .= '<td colspan="8" class="text-center">Data Not Found</td>';
                         $element .= '</tr>';
@@ -125,9 +122,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     elseif ($j == 2) {
                                         $filename = "../database/Uploaded/" . $class[$j] . "";
                                         if (!file_exists($filename)) {
-                                            $element .= '<td> <a href="#" name="save" class="btn btn-sm btn-danger">Deleted</a> </td>';
+                                            $element .= '<td class="text-center"> <span href="#" name="save" class="text-center">....</span> </td>';
                                         } else {
-                                            $element .= '<td> <a href="../database/Uploaded/'.$class[$j].'" name="save" class="btn btn-sm btn-primary">download</a> </td>';
+                                            $element .= '<td> <a href="../database/Uploaded/'.$class[$j].'" name="save" class="btn btn-sm bg-custom-1 text-custom-1">Download</a> </td>';
                                         }
                                         
                                     }
