@@ -22,3 +22,7 @@
 .size-custom-1 {
     font-size: 14px !important;
 }
+
+.transform-custom-1 {
+    text-transform: capitalize !important;
+}
