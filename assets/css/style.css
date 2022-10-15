@@ -30,9 +30,9 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-#one
+#one, #two
 {
-  margin-top:50px;
+margin-top:50px;
  box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
 }
 .it .btn-orange

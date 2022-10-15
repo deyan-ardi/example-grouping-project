@@ -1,6 +1,11 @@
 <?php 
 require_once '../app/Config/config.php'; 
 require_once '../App/Controller/uploadFileController.php';
+require_once '../app/Services/generateDateFormatService.php';
+
+use services\generateDateFormatService;
+
+$date = new generateDateFormatService;
 
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -24,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row it">
             <div class="col-sm-4" id="one">
                 <br>
-                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" name="save"
-                    novalidate="" autocomplete="off" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-sm-offset-12 form-group">
-                            <h3 class="text-start pb-4">Set your class file</h3>
-                        </div>
+                <div class="row">
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" name="save"
+                        novalidate="" autocomplete="off" enctype="multipart/form-data">
+                    <div class="col-sm-offset-12 form-group">
+                        <h3 class="text-start pb-4">Set your class file</h3>
                     </div>
+                </div>
                     <div id="uploader">
                         <div class="row uploadDoc">
                           <div class="col-sm-11">
@@ -64,8 +69,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <button type="submit" name="save" class="btn btn-primary m-2">Submit</button>
                     </div>
             </div>
-        </div>
         </form>
+
+        <div class="col-12 col-sm-7" id="two">
+        <br>
+            <div class="row">
+                <div class="col-sm-offset-12 form-group">
+                    <h3 class="text-start pb-4">Class Files Data Lists</h3>
+                </div>
+            </div>    
+            <?php
+                        $file_to_read = fopen("../database/General/all_class.csv", "r");
+                                    $element = '';
+                                    $element .=  '<div class="m-custom-2">';
+                                    $element .= '<table class="table table-striped">';
+                                    $element .= '<thead class="bg-custom-1 text-custom-1">';
+                                    $element .= '<tr>';
+                                    $element .= '<th scope="col" class="size-custom-1">#</th>';
+                                    $element .= '<th scope="col" class="size-custom-1">Class Name</th>';
+                                    $element .= '<th scope="col" class="size-custom-1">File</th>';
+                                    $element .= '<th scope="col" class="size-custom-1">Created At</th>';
+                                    $element .= '</tr>';
+                                    $element .= '</thead>';
+                                    $element .= '<tbody>';
+
+                                    $filename = "../database/General/all_class.csv";
+                                    if (!file_exists($filename)) {
+                                        $element .= '<tr>';
+                                        $element .= '<td colspan="8" class="text-center">Data Not Found</td>';
+                                        $element .= '</tr>';
+                                    } else {
+                                        $class_file_read = fopen($filename, "r");
+                                        if ($class_file_read !== FALSE) {
+                                            while (($class = fgetcsv($class_file_read)) !== FALSE) {
+                                                $element .= '<tr>';
+                                                for ($j = 0; $j < count($class); $j++) {
+                                                    if ($j == 3) {
+                                                        $element .= '<td>' . $date->format($class[$j]) . '</td>';
+                                                    } 
+                                                    elseif ($j == 2) {
+                                                        $element .= '<td> <a href="../database/Uploaded/'.$class[$j].'" name="save" class="btn btn-sm btn-primary">download</a> </td>';
+                                                        
+                                                    }
+                                                    else {
+                                                        $element .= '<td>' . $class[$j] . '</td>';
+                                                    }
+                                                }
+                                                $element .= '</tr>';
+                                            }
+                                            fclose($class_file_read);
+                                        }
+                                    }
+                                    $element .= '</tbody>';
+                                    $element .= '</table>';
+                                    $element .= '</div>';
+                                    echo $element;
+
+                            fclose($file_to_read);
+                        ?>
+
+        </div>
     </div>
     <?php require_once 'components/_script.php' ?>
 </body>
