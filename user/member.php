@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     $element .= '</thead>';
                                     $element .= '<tbody>';
 
-                                    $filename = "../database/Class/" . $data[2] . "";
+                                    $filename = "../database/Uploaded/" . $data[2] . "";
                                     if (!file_exists($filename)) {
                                         $element .= '<tr>';
                                         $element .= '<td colspan="8" class="text-center">Data Not Found</td>';

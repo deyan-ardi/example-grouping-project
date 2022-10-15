@@ -19,10 +19,10 @@ class generateGroupMemberService
             }
             fclose($file_to_read);
         }
-        $filename = "../database/Class/" . $class_file . "";
+        $filename = "../database/Uploaded/" . $class_file . "";
         $student = $this->getStudentData($filename, $studentID);
         if (!$student) {
-            return 25%5;
+            return 25 % 5;
             // return false;
         }
     }
@@ -41,7 +41,6 @@ class generateGroupMemberService
                         return false;
                         break;
                     } else {
-                        
                     }
                 }
             }
