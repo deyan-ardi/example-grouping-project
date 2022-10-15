@@ -131,6 +131,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         }
                                         
                                     }
+
+                                    elseif ($j == 1) {
+                                        $element .= '<td class="text-capitalize">' . $class[$j] . '</td>';
+                                    }
                                     else {
                                         $element .= '<td>' . $class[$j] . '</td>';
                                     }
