@@ -15,7 +15,7 @@ if (isset($_POST['id_class'])) {
     }
 
 
-    $filename = "../../database/Class/" . $class_file . "";
+    $filename = "../../database/Uploaded/" . $class_file . "";
 
     if (!file_exists($filename)) {
         echo '<option value=""> -- No Data Found --</option>';
