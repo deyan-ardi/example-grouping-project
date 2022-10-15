@@ -16,19 +16,19 @@ class UploadFile
       if (isset($_POST['save'])) {
         $getData = file_get_contents("../database/General/all_class.csv");
         $data = explode("\n", $getData);
-        $status = false;
         foreach ($data as $row => $data) {
             $row_class_name = explode(',', $data);
-            $data_class_name = strtolower($row_class_name[1]);
+            $data_class_name = trim(strtolower($row_class_name[1]),'"');
             if ($data_class_name == strtolower($_POST['class_name'])) {
                 $status = true;
                 break;
             }
         }
-        if (empty($class_name = $_POST['class_name']) || empty($files = $_FILES['file'])){
+        if (empty($class_name = $_POST['class_name']) || $_FILES['file']['size'] == 0){
             $_SESSION['message'] ='<div style="color:red;">Class name cannot be empty</div>';
             $_SESSION['files'] ='<div style="color:red;">Please select a valid file (.csv)</div>';
             header("Location: index.php");
+
         } else {
             if (!$status) {
                 if(isset($_FILES['file'])){

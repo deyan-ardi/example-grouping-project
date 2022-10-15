@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <?php require_once 'components/_navbar.php' ?>
     <div class="container">
-        <div class="row it">
+        <div class="row it px-3">
             <div class="col-sm-4 mx-2" id="one">
                 <br>
                 <div class="row">
@@ -39,8 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div id="uploader">
                         <div class="row uploadDoc">
                           <div class="col-sm-11">
+                          <?php
+                              if (isset($_SESSION['success'])) {
+                                echo $_SESSION['success'];
+                                unset($_SESSION['success']);
+                              }
+                            ?>
                           <label for="class_name" class="form-label">Class Name</label>
-                            <input type="text" class="form-control" name="class_name">
+                            <input type="text" class="form-control text-capitalize" name="class_name">
                             <?php
                               if (isset($_SESSION['message'])) {
                                 echo $_SESSION['message'];
@@ -65,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           </div>
                         </div>
                     </div>
-                    <div class="text-center">
-                        <button type="submit" name="save" class="btn btn-primary m-2 ">Submit</button>
+                    <div class="text-center pe-3">
+                        <button type="submit" name="save" class="btn btn-primary m-2 col-12">Submit</button>
                     </div>
             </div>
         </form>
@@ -79,54 +85,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>    
             <?php
-                        $file_to_read = fopen("../database/General/all_class.csv", "r");
-                                    $element = '';
-                                    $element .=  '<div class="m-custom-2">';
-                                    $element .= '<table class="table table-striped">';
-                                    $element .= '<thead class="bg-custom-1 text-custom-1">';
-                                    $element .= '<tr>';
-                                    $element .= '<th scope="col" class="size-custom-1">#</th>';
-                                    $element .= '<th scope="col" class="size-custom-1">Class Name</th>';
-                                    $element .= '<th scope="col" class="size-custom-1">File</th>';
-                                    $element .= '<th scope="col" class="size-custom-1">Created At</th>';
-                                    $element .= '</tr>';
-                                    $element .= '</thead>';
-                                    $element .= '<tbody>';
-
-                                    $filename = "../database/General/all_class.csv";
-                                    if (!file_exists($filename)) {
-                                        $element .= '<tr>';
-                                        $element .= '<td colspan="8" class="text-center">Data Not Found</td>';
-                                        $element .= '</tr>';
-                                    } else {
-                                        $class_file_read = fopen($filename, "r");
-                                        if ($class_file_read !== FALSE) {
-                                            while (($class = fgetcsv($class_file_read)) !== FALSE) {
-                                                $element .= '<tr>';
-                                                for ($j = 0; $j < count($class); $j++) {
-                                                    if ($j == 3) {
-                                                        $element .= '<td>' . $date->format($class[$j]) . '</td>';
-                                                    } 
-                                                    elseif ($j == 2) {
-                                                        $element .= '<td> <a href="../database/Uploaded/'.$class[$j].'" name="save" class="btn btn-sm btn-primary">download</a> </td>';
-                                                        
-                                                    }
-                                                    else {
-                                                        $element .= '<td>' . $class[$j] . '</td>';
-                                                    }
-                                                }
-                                                $element .= '</tr>';
-                                            }
-                                            fclose($class_file_read);
-                                        }
-                                    }
-                                    $element .= '</tbody>';
-                                    $element .= '</table>';
-                                    $element .= '</div>';
-                                    echo $element;
-
-                            fclose($file_to_read);
-                        ?>
+            $file_to_read = fopen("../database/General/all_class.csv", "r");
+            $element = '';
+            $element .=  '<div class="m-custom-2">';
+            $element .= '<table class="table table-striped">';
+            $element .= '<thead class="bg-custom-1 text-custom-1">';
+            $element .= '<tr>';
+            $element .= '<th scope="col" class="size-custom-1">#</th>';
+            $element .= '<th scope="col" class="size-custom-1">Class Name</th>';
+            $element .= '<th scope="col" class="size-custom-1">File</th>';
+            $element .= '<th scope="col" class="size-custom-1">Created At</th>';
+            $element .= '</tr>';
+            $element .= '</thead>';
+            $element .= '<tbody>';
+            $filename = "../database/General/all_class.csv";
+            if (!file_exists($filename)) {
+                $element .= '<tr>';
+                $element .= '<td colspan="8" class="text-center">Data Not Found</td>';
+                $element .= '</tr>';
+            } else {
+                $class_file_read = fopen($filename, "r");
+                if ($class_file_read !== FALSE) {
+                    while (($class = fgetcsv($class_file_read)) !== FALSE) {
+                        $element .= '<tr>';
+                        for ($j = 0; $j < count($class); $j++) {
+                            if ($j == 3) {
+                                $element .= '<td>' . $date->format($class[$j]) . '</td>';
+                            } 
+                            elseif ($j == 2) {
+                                $element .= '<td> <a href="../database/Uploaded/'.$class[$j].'" name="save" class="btn btn-sm btn-primary">download</a> </td>';
+                                
+                            }
+                            else {
+                                $element .= '<td>' . $class[$j] . '</td>';
+                            }
+                        }
+                        $element .= '</tr>';
+                    }
+                    fclose($class_file_read);
+                }
+            }
+            $element .= '</tbody>';
+            $element .= '</table>';
+            $element .= '</div>';
+            echo $element;
+                fclose($file_to_read);
+            ?>
 
         </div>
     </div>
