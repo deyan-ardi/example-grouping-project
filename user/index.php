@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="POST" class="needs-validation" name="save"
                     novalidate="" autocomplete="off" enctype="multipart/form-data">
                     <div class="col-sm-12 form-group pt-3">
-                        <h3 class="text-center">Set your class file</h3>
+                        <h3 class="text-center">Set your workspace file</h3>
                     </div>
                     <div id="uploader">
                         <div class="row uploadDoc">
