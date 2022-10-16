@@ -64,7 +64,7 @@ class registerMemberController
                     $time = $_POST['time'];
                     $platform = $_POST['platform'];
                     $date = date("Y-m-d H:i:s");
-                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst( $group_member), ucfirst($day), ucfirst($time), ucfirst($platform), $date);
+                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst( $group_member), ucfirst($platform), ucfirst($day), ucfirst($time), $date);
                     $fp = fopen($filename, 'a+');
                     $create = fputcsv($fp, $arrdata);    
                     fclose($fp);
