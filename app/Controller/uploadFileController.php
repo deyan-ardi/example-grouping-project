@@ -25,7 +25,7 @@ class UploadFile
             }
         }
         if (empty($class_name = $_POST['class_name']) || $_FILES['file']['size'] == 0){
-            $_SESSION['message'] ='<div style="color:red;">Class name cannot be empty</div>';
+            $_SESSION['message'] ='<div style="color:red;">Workspace cannot be empty</div>';
             $_SESSION['files'] ='<div style="color:red;">Please select a valid file (.csv)</div>';
             header("Location: index.php");
 
@@ -39,7 +39,7 @@ class UploadFile
                     $file_up_name = date('dmyYHis')."_".$file_name;
                     move_uploaded_file($tmp_name, "../database/Uploaded/".$file_up_name);
                     $date = date("Y-m-d H:i:s");
-                    $arrdata = array($id, $class_name, $file_up_name, $date);
+                    $arrdata = array($id, ucfirst($class_name), $file_up_name, $date);
                     $fp = fopen('../database//General/all_class.csv', 'a+');
                     $create = fputcsv($fp, $arrdata);    
                     fclose($fp);
@@ -48,7 +48,7 @@ class UploadFile
                 }
             } else {
                 $class_name = $_POST['class_name'];
-                $_SESSION['message'] = '<div style="color:red;">Oh snap! ' . $class_name . ' is already in the record data</div>';
+                $_SESSION['message'] = '<div style="color:red;">'.$class_name . ' is already in the record data</div>';
                 header("Location: index.php");
             }
         }
