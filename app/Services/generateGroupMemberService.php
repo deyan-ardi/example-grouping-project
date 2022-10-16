@@ -10,6 +10,7 @@ class generateGroupMemberService
     {
         $this->max_person_in_one_group = 5;
     }
+
     public function logic(
         string $studentID,
         string $class,
@@ -114,6 +115,37 @@ class generateGroupMemberService
                 return $get_group_by_count;
             }
         } else {
+            $get_allow_group_by_platform = $this->getAllowGroupByPlatform($filename, $platform);
+            if (!$get_allow_group_by_platform) {
+                $get_allow_group_by_day = $this->getAllowGroupByDay($filename, $day);
+                if (!$get_allow_group_by_day) {
+                    $get_group_by_count = $this->getAllowGroupByCount($filename);
+                    if (!$get_group_by_count) {
+                        return 402;
+                    }
+                    return $get_group_by_count;
+                }
+                $count_member_in_day_group = $this->countMemberInGroup($filename, $get_allow_group_by_day);
+                if ($count_member_in_day_group < $this->max_person_in_one_group) {
+                    return $get_allow_group_by_day;
+                }
+
+                $get_group_by_count = $this->getAllowGroupByCount($filename);
+                if (!$get_group_by_count) {
+                    return 402;
+                }
+                return $get_group_by_count;
+            }
+            $count_member_in_platform_group = $this->countMemberInGroup($filename, $get_allow_group_by_platform);
+            if ($count_member_in_platform_group < $this->max_person_in_one_group) {
+                return $get_allow_group_by_platform;
+            }
+
+            $get_group_by_count = $this->getAllowGroupByCount($filename);
+            if (!$get_group_by_count) {
+                return 402;
+            }
+            return $get_group_by_count;
         }
     }
 

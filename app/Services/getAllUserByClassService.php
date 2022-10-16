@@ -21,6 +21,7 @@ if (isset($_POST['id_class'])) {
         echo '<option value=""> -- No Data Found --</option>';
     } else {
         $file_to_read = fopen($filename, "r");
+        echo '<option value="">-- Select or Skip This Field -- </option><br>';
         if ($file_to_read !== FALSE) {
             while (($data = fgetcsv($file_to_read)) !== FALSE) {
                 foreach ($data as $i) {

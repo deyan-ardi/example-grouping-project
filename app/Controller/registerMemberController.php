@@ -18,10 +18,11 @@ class registerMemberController
     {
         $request = $_REQUEST;
         if (!empty($request['first_name']) && !empty($request['last_name']) && !empty($request['student_id']) && !empty($request['class']) && !empty($request['day']) && !empty($request['time']) && !empty($request['platform'])) {
+            $friend = isset($request['friend']) ? $request['friend'] : null;
             $group_member = $this->generateGroupMemberService->logic(
                 $request['student_id'],
                 $request['class'],
-                $request['friend'],
+                $friend,
                 $request['platform'],
                 $request['day'],
             );
@@ -37,6 +38,7 @@ class registerMemberController
             }
             // store data here, we get group member
             // 1. Get Class By $request->class
+           
             if (isset($_POST['class'])) {
                 $class_file = null;
                 $file_to_read = fopen("../database/General/all_class.csv", "r");
@@ -64,15 +66,14 @@ class registerMemberController
                     $time = $_POST['time'];
                     $platform = $_POST['platform'];
                     $date = date("Y-m-d H:i:s");
-                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst( $group_member), ucfirst($platform), ucfirst($day), ucfirst($time), $date);
+                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst($group_member), ucfirst($platform), ucfirst($day), ucfirst($time), $date);
                     $fp = fopen($filename, 'a+');
-                    $create = fputcsv($fp, $arrdata);    
+                    $create = fputcsv($fp, $arrdata);
                     fclose($fp);
                     $_SESSION['success'] = 'Successfully input data into data record';
                     return header("Location: member.php");
                 }
             }
-            die;
         } else {
             $_SESSION['notification'] = 'Please fill in the required data';
             return header("Location: member.php");
