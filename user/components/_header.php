@@ -11,7 +11,7 @@ $page_name = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/
 if ($page_name == "index.php") {
     $page = "Upload File";
 } else {
-    $page = "Add Member";
+    $page = "Form Group";
 }
 ?>
-<title>Grouping App ~ <?= $page; ?></title>
+<title>App ~ <?= $page; ?></title>
