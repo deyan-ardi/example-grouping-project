@@ -37,10 +37,43 @@ class registerMemberController
             }
             // store data here, we get group member
             // 1. Get Class By $request->class
-            // 2. Store to clas file csv
-            // 3. Before store, check file if_exist, if not exist you must create file csv
-            // 4. After success store data, return alert and redirect
-            var_dump($group_member, $request);
+            if (isset($_POST['class'])) {
+                $class_file = null;
+                $file_to_read = fopen("../database/General/all_class.csv", "r");
+                if ($file_to_read !== FALSE) {
+                    while (($data = fgetcsv($file_to_read)) !== FALSE) {
+                        foreach ($data as $i) {
+                            if ($data[0] == $_POST['class']) {
+                                $class_file = $data[2];
+                                $class_name = $data[1];
+                            }
+                            break;
+                        }
+                    }
+                    fclose($file_to_read);
+                }
+                // 2. Store to clas file csv
+                $filename = "../database/Uploaded/" . $class_file . "";
+                if (isset($_POST['save'])) {
+                    $getData = file_get_contents($filename);
+                    $data = explode("\n", $getData);
+                    $id = uniqid();
+                    $first_name = $_POST['first_name'];
+                    $last_name = $_POST['last_name'];
+                    $student_id = $_POST['student_id'];
+                    $class_id = $_POST['class'];
+                    $day = $_POST['day'];
+                    $time = $_POST['time'];
+                    $platform = $_POST['platform'];
+                    $date = date("Y-m-d H:i:s");
+                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst($day), ucfirst($time), ucfirst($platform), $date);
+                    $fp = fopen($filename, 'a+');
+                    $create = fputcsv($fp, $arrdata);    
+                    fclose($fp);
+                    $_SESSION['success'] = 'Successfully input data into data record';
+                    return header("Location: member.php");
+                }
+            }
             die;
         } else {
             $_SESSION['notification'] = 'Please fill in the required data';

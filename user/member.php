@@ -24,27 +24,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
     <?php require_once 'components/_navbar.php' ?>
-    <div class="container m-custom-1">
+    <div class="container">
         <div class="row">
-            <div class="col-12 col-md-12">
-                <?php
-                if (isset($_SESSION['notification']) && $_SESSION['notification'] !== "") {
-                    $element = '';
-                    $element .= '<div class="alert alert-danger" role="alert">';
-                    $element .= $_SESSION['notification'];
-                    $element .= "</div>";
-                    echo $element;
-                    unset($_SESSION['notification']);
-                }
+            <div class="col-12 col-md-12 col-sm-offset-1 mb-5" id="two">
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" name="save">
+                        <div class="col-sm-12 form-group pt-3">
+                            <h3 class="text-center pb-5">Add your data</h3>
+                        </div>
+                        <?php
+                        if (isset($_SESSION['notification']) && $_SESSION['notification'] !== "") {
+                            $element = '';
+                            $element .= '<div class="alert alert-danger" role="alert">';
+                            $element .= $_SESSION['notification'];
+                            $element .= "</div>";
+                            echo $element;
+                            unset($_SESSION['notification']);
+                        }
+
+                        if (isset($_SESSION['success']) && $_SESSION['success'] !== "") {
+                            $element = '';
+                            $element .= '<div class="alert alert-success" role="alert">';
+                            $element .= $_SESSION['success'];
+                            $element .= "</div>";
+                            echo $element;
+                            unset($_SESSION['success']);
+                        }
                 ?>
-
-
-                <div class="card">
-                    <div class="card-header">
-                        Form Add Data
-                    </div>
-                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-                        <div class="card-body row">
+                        <div class="row">
                             <div class="col-12 col-md-6">
                                 <div class="mb-3">
                                     <label for="first_name" class="form-label">First Name</label>
@@ -116,13 +122,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </select>
                                 </div>
                             </div>
-                            <button class="btn bg-custom-1 text-custom-1 col-12">Submit Data</button>
+                            <div class="text-center pe-3">
+                        <button type="submit" name="save"
+                            class="btn bg-custom-1 text-custom-1 m-2 col-12">Submit Data</button>
+                    </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
     <!-- End contact Section  -->
     <?php require_once 'components/_script.php' ?>
     <?php require_once 'components/_customJs.php' ?>
