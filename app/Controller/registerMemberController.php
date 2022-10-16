@@ -55,8 +55,6 @@ class registerMemberController
                 // 2. Store to clas file csv
                 $filename = "../database/Uploaded/" . $class_file . "";
                 if (isset($_POST['save'])) {
-                    $getData = file_get_contents($filename);
-                    $data = explode("\n", $getData);
                     $id = uniqid();
                     $first_name = $_POST['first_name'];
                     $last_name = $_POST['last_name'];
@@ -66,7 +64,7 @@ class registerMemberController
                     $time = $_POST['time'];
                     $platform = $_POST['platform'];
                     $date = date("Y-m-d H:i:s");
-                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst($day), ucfirst($time), ucfirst($platform), $date);
+                    $arrdata = array($id, $student_id, ucfirst($first_name), ucfirst($last_name), ucfirst($class_name), ucfirst( $group_member), ucfirst($day), ucfirst($time), ucfirst($platform), $date);
                     $fp = fopen($filename, 'a+');
                     $create = fputcsv($fp, $arrdata);    
                     fclose($fp);
