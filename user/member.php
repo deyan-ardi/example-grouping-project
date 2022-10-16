@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         if ($file_to_read !== FALSE) {
                                             while (($data = fgetcsv($file_to_read)) !== FALSE) {
                                                 foreach ($data as $i) {
-                                                    echo '<option value="' . $data[0] . '">' . $data[1] . '</option>';
+                                                    echo '<option class="text-capitalize" value="' . $data[0] . '">' . $data[1] . '</option>';
                                                     break;
                                                 }
                                             }
