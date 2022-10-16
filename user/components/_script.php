@@ -3,4 +3,4 @@
 <script src="<?= $config['base_url']; ?>/assets/js/jquery.min.js"></script>
 <script src="<?= $config['base_url']; ?>/assets/js/popper.min.js"></script>
 <script src="<?= $config['base_url']; ?>/assets/js/bootstrap.min.js"></script>
-<script src="<?= $config['base_url']; ?>/assets/js/uploadFile.js"></script>
+<script src="<?= $config['base_url']; ?>/assets/js/uploadScript.js"></script>
