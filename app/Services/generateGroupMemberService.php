@@ -30,6 +30,7 @@ class generateGroupMemberService
             }
             fclose($file_to_read);
         }
+
         $filename = "../database/Uploaded/" . $class_file . "";
         $is_student_same = $this->getStudentData($filename, $studentID);
         if (!$is_student_same) {

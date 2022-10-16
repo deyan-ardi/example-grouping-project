@@ -36,6 +36,10 @@ class registerMemberController
                 return header("Location: member.php");
             }
             // store data here, we get group member
+            // 1. Get Class By $request->class
+            // 2. Store to clas file csv
+            // 3. Before store, check file if_exist, if not exist you must create file csv
+            // 4. After success store data, return alert and redirect
             var_dump($group_member, $request);
             die;
         } else {

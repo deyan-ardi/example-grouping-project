@@ -1,6 +1,5 @@
 <?php
 require_once '../app/Config/config.php';
-require_once '../app/Services/generateDateFormatService.php';
 require_once '../app/Controller/registerMemberController.php';
 session_start();
 ?>
@@ -8,9 +7,7 @@ session_start();
 <?php
 
 use app\Controller\registerMemberController;
-use services\generateDateFormatService;
 
-$date = new generateDateFormatService;
 $memberController = new registerMemberController;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $store_data = $memberController->storeMember();
