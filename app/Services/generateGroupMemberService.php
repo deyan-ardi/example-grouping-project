@@ -372,7 +372,6 @@ class generateGroupMemberService
         $group_3 = 0;
         $group_4 = 0;
         $group_5 = 0;
-        $arr_group = [];
         if (!file_exists($filename)) {
             fopen($filename, "w");
         }
